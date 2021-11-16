@@ -1,25 +1,23 @@
-{{- range .Values.stacks }}
+{{- range $index, $stack := .Values.stacks }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ . }}
+  name: {{ $stack }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "{{ add1 $index }}"
 spec:
   destination:
     name: in-cluster
-  project: {{ . }}
+  project: default
   source:
     repoURL: https://github.com/khuedoan/homelab.git
-    path: {{ . }}
+    chart: {{ $stack }}
+    targetRevision: bootstrap-rework
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
----
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: {{ . }}
 {{- end }}
