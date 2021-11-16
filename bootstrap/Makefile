@@ -3,13 +3,11 @@
 
 KUBECONFIG = ../metal/kubeconfig.yaml
 
-default: argocd root-app
+default: charts apply
 
-.PHONY: argocd
-argocd:
-	kustomize build ./argocd | kubectl apply -f -
-	# TODO wait for argocd
+charts:
+	helm dependency update
 
-.PHONY: root-app
-root-app:
-	kustomize build ./root-app | kubectl apply -f -
+apply:
+	# ArgoCD only uses Helm as YAML generator
+	helm template . | kubectl apply -f -
