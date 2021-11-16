@@ -14,9 +14,6 @@ argo-cd:
           end
         end
         return hs
-    certificate:
-      enabled: true
-      domain: argocd.khuedoan.com
     ingress:
       enabled: true
       hosts:
