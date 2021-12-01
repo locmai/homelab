@@ -2,17 +2,18 @@
 .EXPORT_ALL_VARIABLES:
 
 KUBECONFIG = ../metal/kubeconfig.yaml
+NAMESPACE = argocd
 
-default: charts apply
-
-charts:
-	helm dependency update
+default: namespace apply
 
 namespace:
 	kubectl create namespace argocd --dry-run=client --output=yaml \
 		| kubectl apply -f -
 
-apply: namespace
+apply:
 	# ArgoCD only uses Helm as YAML generator
-	helm template --include-crds argocd . \
+	helm template \
+		--include-crds \
+		--namespace ${NAMESPACE} \
+		argocd . \
 		| kubectl apply -n argocd -f -
