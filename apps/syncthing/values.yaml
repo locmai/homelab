@@ -2,6 +2,7 @@ syncthing:
   ingress:
     main:
       enabled: true
+      ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
       hosts:
@@ -14,6 +15,7 @@ syncthing:
         hosts:
         - syncthing.khuedoan.com
   persistence:
+    storageClass: longhorn
     data:
       enabled: true
       size: 10Gi

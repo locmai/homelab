@@ -1,6 +1,7 @@
 gitea:
   ingress:
     enabled: true
+    className: nginx
     annotations:
       cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
     hosts:
@@ -16,3 +17,8 @@ gitea:
     config:
       server:
         LANDING_PAGE: explore
+  persistence:
+    storageClass: longhorn
+  postgresql:
+    persistence:
+      storageClass: longhorn

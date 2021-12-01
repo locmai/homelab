@@ -9,6 +9,8 @@ diagrams:
 		&& source .venv/bin/activate \
 		&& pip3 install -r requirements.txt \
 		&& python3 *.py
+	mkdir -p src/images
+	cp diagrams/*.jpg src/images/
 
 .PHONY: book
 book: diagrams

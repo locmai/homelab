@@ -1,3 +1,0 @@
-# Deploy the homelab
-
-TODO
