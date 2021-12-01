@@ -4,6 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ $stack }}
+  namespace: {{ $.Release.Namespace }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   annotations:
@@ -11,12 +12,15 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: argocd
-  project: default
+    namespace: {{ $.Release.Namespace }}
+  project: default # TODO separate project
   source:
-    repoURL: https://github.com/khuedoan/homelab.git
+    repoURL: {{ $.Values.global.repository }}
     chart: {{ $stack }}
-    targetRevision: bootstrap-rework
+    targetRevision: {{ $.Values.global.revision }}
+    helm:
+      values: |
+        domain: {{ $.Values.global.domain }}
   syncPolicy:
     automated:
       prune: true
