@@ -204,7 +204,7 @@ They can't capture all of the project's features, but they are sufficient to get
 
 ## Roadmap
 
-See [roadmap](https://homelab.khuedoan.com/roadmap) and [open issues](https://github.com/khuedoan/homelab/issues) for a list of proposed features and known issues.
+See [roadmap](https://homelab.khuedoan.com/roadmap) and [open issues](https://github.com/locmai/homelab/issues) for a list of proposed features and known issues.
 
 ## Contributing
 
